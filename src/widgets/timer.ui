@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <!-- interface-name timer.ui -->
+  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.12"/>
+  <template class="PomodoroTimer" parent="GtkBox">
+    <property name="css-classes">card
+</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">10</property>
+    <child>
+      <object class="GtkLabel" id="timer">
+        <property name="label">&lt;span size="64pt"&gt;--:--&lt;/span&gt;</property>
+        <property name="use-markup">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="btn">
+        <property name="css-classes">pill
+suggested-action</property>
+        <property name="label">Next</property>
+        <property name="margin-bottom">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-start">10</property>
+        <property name="margin-top">10</property>
+      </object>
+    </child>
+  </template>
+</interface>

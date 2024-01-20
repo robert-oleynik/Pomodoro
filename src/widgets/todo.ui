@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <!-- interface-name todo.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <template class="TodoEntryWidget" parent="GtkBox">
+    <child>
+      <object class="GtkCheckButton" id="cdone">
+        <property name="margin-start">5</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="halign">start</property>
+        <property name="hexpand">True</property>
+        <property name="margin-start">10</property>
+        <child>
+          <object class="GtkLabel" id="text">
+            <property name="halign">start</property>
+            <property name="hexpand">True</property>
+            <property name="name">text</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry">
+            <property name="halign">start</property>
+            <property name="hexpand">True</property>
+            <property name="name">entry</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="edit">
+        <property name="css-classes">flat</property>
+        <property name="icon-name">document-edit-symbolic</property>
+      </object>
+    </child>
+  </template>
+</interface>

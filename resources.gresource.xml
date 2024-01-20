@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/local/app/Pomodoro">
+        <file compressed="true" preprocess="xml-stripblanks">widgets/todo.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks">widgets/timer.ui</file>
+    </gresource>
+</gresources>

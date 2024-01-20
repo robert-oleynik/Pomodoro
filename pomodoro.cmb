@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.13.1" target_tk="gtk-4.0">
+  <ui>
+	(2,1,"todo.ui","src/widgets/todo.ui",None,None,None,None,None,None,None),
+	(4,1,"timer.ui","src/widgets/timer.ui",None,None,None,None,None,None,None)
+  </ui>
+  <ui_library>
+	(4,"Adw","1.0",None),
+	(4,"gtk","4.12",None)
+  </ui_library>
+  <object>
+	(2,1,"GtkBox","TodoEntryWidget",None,None,None,None,None,None),
+	(2,2,"GtkCheckButton","cdone",1,None,None,None,None,None),
+	(2,3,"GtkButton","edit",1,None,None,None,2,None),
+	(2,4,"GtkStack","stack",1,None,None,None,1,None),
+	(2,5,"GtkLabel","text",4,None,None,None,-1,None),
+	(2,6,"GtkEntry","entry",4,None,None,None,-1,None),
+	(4,1,"GtkBox","PomodoroTimer",None,None,None,None,None,None),
+	(4,2,"GtkLabel","timer",1,None,None,None,None,None),
+	(4,3,"GtkButton","btn",1,None,None,None,1,None)
+  </object>
+  <object_property>
+	(2,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
+	(2,3,"GtkButton","icon-name","document-edit-symbolic",None,None,None,None,None,None,None,None,None),
+	(2,3,"GtkWidget","css-classes","flat",None,None,None,None,None,None,None,None,None),
+	(2,4,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(2,4,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,4,"GtkWidget","margin-start","10",None,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","name","text",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkWidget","name","entry",None,None,None,None,None,None,None,None,None),
+	(4,1,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
+	(4,1,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(4,1,"GtkWidget","css-classes","card\n",None,None,None,None,None,None,None,None,None),
+	(4,2,"GtkLabel","label","&lt;span size=\"64pt\"&gt;--:--&lt;/span&gt;",None,None,None,None,None,None,None,None,None),
+	(4,2,"GtkLabel","use-markup","True",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkButton","label","Next",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkWidget","css-classes","pill\nsuggested-action",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkWidget","margin-bottom","10",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkWidget","margin-end","10",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkWidget","margin-start","10",None,None,None,None,None,None,None,None,None),
+	(4,3,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None)
+  </object_property>
+</cambalache-project>
