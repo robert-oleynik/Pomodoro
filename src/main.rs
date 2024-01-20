@@ -1,6 +1,6 @@
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::fs::File;
-use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::io::{BufRead, BufReader, BufWriter, Cursor, Write};
 use std::rc::Rc;
 use std::time::{Duration, SystemTime};
 
@@ -8,6 +8,8 @@ use adw::prelude::*;
 use directories::ProjectDirs;
 use gtk::glib::ControlFlow;
 use gtk::{gio, glib, SignalListItemFactory};
+use notify_rust::Notification;
+use rodio::Sink;
 use widgets::timer::Timer;
 
 mod state;
@@ -105,6 +107,42 @@ fn save_tasks(list: &gio::ListStore) {
     }
 }
 
+fn alert(state: &State) {
+    let message = match state {
+        State::Pause { .. } => "Pause Complete",
+        State::Working { .. } => "Work Complete",
+    };
+    let handle = Notification::new()
+        .summary("Pomodoro Round End")
+        .body(message)
+        .icon("gnome-pomodoro")
+        .show()
+        .unwrap();
+    match rodio::OutputStream::try_default() {
+        Ok((_stream, handle)) => {
+            match rodio::Decoder::new(Cursor::new(include_bytes!("notify_end.wav"))) {
+                Ok(audio) => {
+                    if let Err(err) = Sink::try_new(&handle).map(|sink| {
+                        sink.append(audio);
+                        sink.sleep_until_end();
+                    }) {
+                        glib::g_error!("Pomodoro.Alert", "{err}");
+                    }
+                }
+                Err(err) => {
+                    glib::g_error!("Pomodoro.Alert", "{err}");
+                }
+            };
+        }
+        Err(err) => {
+            glib::g_error!("Pomodoro.Alert", "{err}")
+        }
+    }
+    gio::spawn_blocking(move || {
+        let _ = handle;
+    });
+}
+
 fn start(app: &adw::Application) {
     gio::resources_register_include!("resources.gresource").unwrap();
 
@@ -116,6 +154,8 @@ fn start(app: &adw::Application) {
         .application(app)
         .title("Pomodoro")
         .build();
+
+    let notified = Rc::new(Cell::new(true));
 
     let todo_model = gio::ListStore::new::<state::todo::Entry>();
     read_tasks(&todo_model);
@@ -156,10 +196,16 @@ fn start(app: &adw::Application) {
     let timer = Timer::default();
     let gstate = state.clone();
     let gtimer = timer.clone();
+    let gnotified = notified.clone();
     glib::timeout_add_local(Duration::from_secs(1), move || {
         let now = SystemTime::now();
         match *gstate.as_ref().borrow() {
             State::Pause { until } | State::Working { until } if until < now => {
+                if !gnotified.get() {
+                    gnotified.set(true);
+                    let state = gstate.borrow();
+                    alert(&*state);
+                }
                 match now.duration_since(until) {
                     Ok(u) => gtimer.set_property("time_secs", -(u.as_secs() as i32)),
                     Err(err) => glib::g_error!("Pomodoro", "{err}"),
@@ -173,7 +219,9 @@ fn start(app: &adw::Application) {
         ControlFlow::Continue
     });
     let gstate = state.clone();
+    let gnotified = notified.clone();
     timer.connect_next(move |timer| {
+        gnotified.set(false);
         let now = SystemTime::now();
         let new = match *gstate.as_ref().borrow() {
             State::Pause { .. } => State::Working {
