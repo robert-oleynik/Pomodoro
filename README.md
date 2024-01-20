@@ -1,12 +1,33 @@
 # Pomodoro (GUI)
 
-<!-- TODO: Image -->
+A graphical Pomodoro and To-Do List application using GTK and libadwaita.
+
+![Screenshot of this application](./screenshot.png)
 
 # Features
 
 - [x] Simple Pomodoro
 - [x] Simple To-Do List
 - [x] Save/Store non-completed tasks
+
+# Installation
+
+Dependencies:
+
+- [GTK](https://www.gtk.org/) 4.12+
+- [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) 1.4+
+- Rust+Cargo
+
+## From Source
+
+```sh
+git clone https://github.com/robert-oleynik/Pomodoro
+cd Pomodoro
+cargo install --path .
+
+# Optional (Will add this application to your application launcher)
+cp Pomodoro.desktop ~/.local/share/applications
+```
 
 # External Resources
 
