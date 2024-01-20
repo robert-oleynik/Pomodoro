@@ -13,11 +13,15 @@
       <object class="GtkStack" id="stack">
         <property name="halign">start</property>
         <property name="hexpand">True</property>
+        <property name="hexpand-set">True</property>
         <property name="margin-start">10</property>
+        <property name="vexpand">True</property>
+        <property name="vexpand-set">True</property>
         <child>
           <object class="GtkLabel" id="text">
             <property name="halign">start</property>
             <property name="hexpand">True</property>
+            <property name="hexpand-set">True</property>
             <property name="name">text</property>
           </object>
         </child>
@@ -25,6 +29,7 @@
           <object class="GtkEntry" id="entry">
             <property name="halign">start</property>
             <property name="hexpand">True</property>
+            <property name="hexpand-set">True</property>
             <property name="name">entry</property>
           </object>
         </child>
