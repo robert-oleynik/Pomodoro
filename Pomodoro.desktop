@@ -1,0 +1,8 @@
+[Desktop Entry]
+Icon=gnome-pomodoro
+Name=Pomodoro
+Categories=Utility;Clock
+Exec=pomodoro
+Version=1.5
+Type=Application
+Terminal=false
