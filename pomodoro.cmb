@@ -26,7 +26,13 @@
 	(5,4,"AdwWindowTitle",None,3,None,None,None,-1,None),
 	(5,5,"AdwClamp",None,2,None,None,None,1,None),
 	(5,6,"GtkBox",None,5,None,None,None,-1,None),
-	(5,7,"PomodoroTimer",None,6,None,None,None,None,None)
+	(5,7,"PomodoroTimer","timer",6,None,None,None,None,None),
+	(5,8,"GtkEntry","todo_entry",6,None,None,None,1,None),
+	(5,9,"GtkListView","todo_list",6,None,None,None,2,None),
+	(5,10,"GtkNoSelection",None,9,None,None,None,-1,None),
+	(5,11,"GListStore",None,10,None,None,None,-1,None),
+	(5,12,"GtkSignalListItemFactory","todo_factory",9,None,None,None,-1,None),
+	(5,13,"GtkButton","settings",3,None,"end",None,-1,None)
   </object>
   <object_property>
 	(2,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
@@ -60,7 +66,18 @@
 	(5,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
 	(5,3,"AdwHeaderBar","title-widget",None,None,None,None,None,4,None,None,None,None),
 	(5,4,"AdwWindowTitle","title","Pomodoro",None,None,None,None,None,None,None,None,None),
+	(5,5,"GtkWidget","margin-bottom","10",None,None,None,None,None,None,None,None,None),
+	(5,5,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
 	(5,5,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
-	(5,6,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None)
+	(5,6,"GtkBox","spacing","10",None,None,None,None,None,None,None,None,None),
+	(5,6,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(5,8,"GtkEntry","secondary-icon-name","list-add-symbolic",None,None,None,None,None,None,None,None,None),
+	(5,8,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(5,9,"GtkListView","factory",None,None,None,None,None,12,None,None,None,None),
+	(5,9,"GtkListView","model",None,None,None,None,None,10,None,None,None,None),
+	(5,9,"GtkWidget","css-classes","boxed-list\n\n",None,None,None,None,None,None,None,None,None),
+	(5,10,"GtkNoSelection","model",None,None,None,None,None,11,None,None,None,None),
+	(5,11,"GListStore","item-type","TodoListEntry",None,None,None,None,None,None,None,None,None),
+	(5,13,"GtkButton","icon-name","settings",None,None,None,None,None,None,None,None,None)
   </object_property>
 </cambalache-project>

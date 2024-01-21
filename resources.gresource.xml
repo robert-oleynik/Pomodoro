@@ -3,5 +3,6 @@
     <gresource prefix="/local/app/Pomodoro">
         <file compressed="true" preprocess="xml-stripblanks">widgets/todo.ui</file>
         <file compressed="true" preprocess="xml-stripblanks">widgets/timer.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
     </gresource>
 </gresources>

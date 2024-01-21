@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <requires lib="gio" version="2.44"/>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="PomodoroApplication" parent="AdwApplicationWindow">
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title">Pomodoro</property>
+              </object>
+            </property>
+            <child type="end">
+              <object class="GtkButton" id="settings">
+                <property name="icon-name">settings</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwClamp">
+            <property name="margin-bottom">10</property>
+            <property name="margin-top">10</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="PomodoroTimer" id="timer"/>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="todo_entry">
+                    <property name="margin-top">10</property>
+                    <property name="secondary-icon-name">list-add-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListView" id="todo_list">
+                    <property name="css-classes">boxed-list
+
+</property>
+                    <property name="factory">
+                      <object class="GtkSignalListItemFactory" id="todo_factory"/>
+                    </property>
+                    <property name="model">
+                      <object class="GtkNoSelection">
+                        <property name="model">
+                          <object class="GListStore">
+                            <property name="item-type">TodoListEntry</property>
+                          </object>
+                        </property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

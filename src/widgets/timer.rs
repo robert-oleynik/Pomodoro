@@ -1,12 +1,9 @@
 use adw::prelude::*;
 use adw::subclass::prelude::*;
-use glib::subclass::Signal;
 use gtk::glib;
 use std::cell::Cell;
 
 mod imp {
-    use once_cell::sync::Lazy;
-
     use super::*;
 
     #[derive(gtk::CompositeTemplate, glib::Properties, Default)]
