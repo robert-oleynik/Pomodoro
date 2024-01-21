@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<schemalist>
+    <schema id="local.app.Pomodoro" path="/local/app/Pomodoro/">
+        <key name="duration-work" type="t">
+            <default>1500</default>
+            <summary>Duration of the work round.</summary>
+        </key>
+        <key name="duration-short-pause" type="t">
+            <default>300</default>
+            <summary>Duration of the short round.</summary>
+        </key>
+        <key name="duration-long-pause" type="t">
+            <default>600</default>
+            <summary>Duration of the long round.</summary>
+        </key>
+        <key name="long-pause-every-round" type="t">
+            <default>4</default>
+            <summary>Number of working rounds before a long pause.</summary>
+        </key>
+    </schema>
+</schemalist>

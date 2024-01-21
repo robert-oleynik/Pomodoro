@@ -25,6 +25,11 @@ git clone https://github.com/robert-oleynik/Pomodoro
 cd Pomodoro
 cargo install --path .
 
+# GLib settings
+mkdir ~/.local/share/glib-2.0/schemas # May be necessary
+cp local.app.Pomodoro.gschema.xml ~/.local/share/glib-2.0/schemas
+glib-compile-schemas ~/.local/share/glib-2.0/schemas
+
 # Optional (Will add this application to your application launcher)
 cp Pomodoro.desktop ~/.local/share/applications
 ```

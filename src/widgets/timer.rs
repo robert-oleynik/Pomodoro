@@ -41,11 +41,6 @@ mod imp {
 
     #[glib::derived_properties]
     impl ObjectImpl for Timer {
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| vec![Signal::builder("next").build()]);
-            SIGNALS.as_ref()
-        }
-
         fn constructed(&self) {
             self.parent_constructed();
 

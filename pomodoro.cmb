@@ -3,7 +3,8 @@
 <cambalache-project version="0.13.1" target_tk="gtk-4.0">
   <ui>
 	(2,1,"todo.ui","src/widgets/todo.ui",None,None,None,None,None,None,None),
-	(4,1,"timer.ui","src/widgets/timer.ui",None,None,None,None,None,None,None)
+	(4,1,"timer.ui","src/widgets/timer.ui",None,None,None,None,None,None,None),
+	(5,1,None,"src/window.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(4,"Adw","1.0",None),
@@ -18,7 +19,14 @@
 	(2,6,"GtkEntry","entry",4,None,None,None,-1,None),
 	(4,1,"GtkBox","PomodoroTimer",None,None,None,None,None,None),
 	(4,2,"GtkLabel","timer",1,None,None,None,None,None),
-	(4,3,"GtkButton","btn",1,None,None,None,1,None)
+	(4,3,"GtkButton","btn",1,None,None,None,1,None),
+	(5,1,"AdwApplicationWindow","PomodoroApplication",None,None,None,None,-1,None),
+	(5,2,"GtkBox",None,1,None,None,None,-1,None),
+	(5,3,"AdwHeaderBar",None,2,None,None,None,None,None),
+	(5,4,"AdwWindowTitle",None,3,None,None,None,-1,None),
+	(5,5,"AdwClamp",None,2,None,None,None,1,None),
+	(5,6,"GtkBox",None,5,None,None,None,-1,None),
+	(5,7,"PomodoroTimer",None,6,None,None,None,None,None)
   </object>
   <object_property>
 	(2,2,"GtkWidget","margin-start","5",None,None,None,None,None,None,None,None,None),
@@ -48,6 +56,11 @@
 	(4,3,"GtkWidget","margin-bottom","10",None,None,None,None,None,None,None,None,None),
 	(4,3,"GtkWidget","margin-end","10",None,None,None,None,None,None,None,None,None),
 	(4,3,"GtkWidget","margin-start","10",None,None,None,None,None,None,None,None,None),
-	(4,3,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None)
+	(4,3,"GtkWidget","margin-top","10",None,None,None,None,None,None,None,None,None),
+	(5,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(5,3,"AdwHeaderBar","title-widget",None,None,None,None,None,4,None,None,None,None),
+	(5,4,"AdwWindowTitle","title","Pomodoro",None,None,None,None,None,None,None,None,None),
+	(5,5,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(5,6,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None)
   </object_property>
 </cambalache-project>

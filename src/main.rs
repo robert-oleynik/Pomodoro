@@ -14,6 +14,7 @@ use widgets::timer::Timer;
 
 mod state;
 mod widgets;
+mod window;
 
 const APP_ID: &str = "local.app.Pomodoro";
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -146,6 +147,13 @@ fn alert(state: &State) {
 fn start(app: &adw::Application) {
     gio::resources_register_include!("resources.gresource").unwrap();
 
+    let settings = gio::Settings::new(APP_ID);
+    let mut round = 0;
+    let duration_work = Duration::from_secs(settings.uint64("duration-work"));
+    let duration_short_pause = Duration::from_secs(settings.uint64("duration-short-pause"));
+    let duration_long_pause = Duration::from_secs(settings.uint64("duration-long-pause"));
+    let long_pause_every_round = Duration::from_secs(settings.uint64("long-pause-every-round"));
+
     let state = Rc::new(RefCell::new(State::Pause {
         until: SystemTime::now(),
     }));
@@ -187,10 +195,6 @@ fn start(app: &adw::Application) {
     let container = gtk::Box::builder()
         .orientation(gtk::Orientation::Vertical)
         .spacing(10)
-        .margin_top(10)
-        .margin_end(10)
-        .margin_start(10)
-        .margin_end(10)
         .build();
 
     let timer = Timer::default();
