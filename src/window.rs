@@ -27,6 +27,8 @@ mod imp {
         todo_factory: gtk::TemplateChild<gtk::SignalListItemFactory>,
         #[template_child]
         timer: gtk::TemplateChild<widgets::Timer>,
+        #[template_child]
+        settings: gtk::TemplateChild<gtk::Button>,
         #[property(get, set)]
         work_secs: Rc<RefCell<u64>>,
         #[property(get, set)]
@@ -153,9 +155,21 @@ mod imp {
                     (state::Pomodoro::Working, _) => *short_pause_secs.as_ref().borrow(),
                     _ => *work_secs.as_ref().borrow(),
                 };
-                timer.set_property("time_secs", secs);
+                timer.set_property("time_secs", secs as i32);
                 state.next(Duration::from_secs(secs));
             });
+
+            let this = self.obj();
+            self.settings
+                .connect_clicked(glib::clone!(@weak this => move |_| {
+                    if let Some(app) = this.application() {
+                        let app = app.downcast::<adw::Application>().unwrap();
+                        let pref = crate::settings::Settings::new(&app);
+                        pref.present();
+                    } else {
+                        glib::g_warning!("Pomdoro", "no application present");
+                    }
+                }));
         }
     }
     impl WidgetImpl for Window {}

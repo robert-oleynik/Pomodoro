@@ -41,22 +41,32 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkListView" id="todo_list">
-                    <property name="css-classes">boxed-list
-
+                  <object class="GtkScrolledWindow">
+                    <property name="hexpand">True</property>
+                    <property name="hexpand-set">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="vexpand-set">True</property>
+                    <child>
+                      <object class="GtkListView" id="todo_list">
+                        <property name="css-classes">boxed-list
 </property>
-                    <property name="factory">
-                      <object class="GtkSignalListItemFactory" id="todo_factory"/>
-                    </property>
-                    <property name="model">
-                      <object class="GtkNoSelection">
+                        <property name="factory">
+                          <object class="GtkSignalListItemFactory" id="todo_factory"/>
+                        </property>
+                        <property name="hexpand">True</property>
                         <property name="model">
-                          <object class="GListStore">
-                            <property name="item-type">TodoListEntry</property>
+                          <object class="GtkNoSelection">
+                            <property name="model">
+                              <object class="GListStore">
+                                <property name="item-type">TodoListEntry</property>
+                              </object>
+                            </property>
                           </object>
                         </property>
+                        <property name="vexpand">True</property>
+                        <property name="vexpand-set">True</property>
                       </object>
-                    </property>
+                    </child>
                   </object>
                 </child>
               </object>

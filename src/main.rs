@@ -3,6 +3,7 @@ use std::time::SystemTime;
 use adw::prelude::*;
 use gtk::{gio, glib};
 
+mod settings;
 mod state;
 mod widgets;
 mod window;

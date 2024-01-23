@@ -5,6 +5,8 @@ use std::cell::Cell;
 
 mod imp {
     use super::*;
+    use gtk::glib::subclass::Signal;
+    use once_cell::sync::Lazy;
 
     #[derive(gtk::CompositeTemplate, glib::Properties, Default)]
     #[template(resource = "/local/app/Pomodoro/widgets/timer.ui")]
@@ -38,6 +40,11 @@ mod imp {
 
     #[glib::derived_properties]
     impl ObjectImpl for Timer {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| vec![Signal::builder("next").build()]);
+            SIGNALS.as_ref()
+        }
+
         fn constructed(&self) {
             self.parent_constructed();
 

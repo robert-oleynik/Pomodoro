@@ -4,5 +4,6 @@
         <file compressed="true" preprocess="xml-stripblanks">widgets/todo.ui</file>
         <file compressed="true" preprocess="xml-stripblanks">widgets/timer.ui</file>
         <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks">settings.ui</file>
     </gresource>
 </gresources>

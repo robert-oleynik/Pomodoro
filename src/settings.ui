@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.16.0 -->
+<interface>
+  <requires lib="gtk" version="4.6"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="PomodoroSettings" parent="AdwPreferencesWindow">
+    <property name="mnemonics-visible">True</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="hexpand">True</property>
+            <property name="title">Pomodoro Rounds</property>
+            <child>
+              <object class="AdwSpinRow" id="round">
+                <property name="climb-rate">1.0</property>
+                <property name="numeric">True</property>
+                <property name="title">Rounds until long break</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="mins_long_break">
+                <property name="title">Minutes Long Break</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="mins_short_break">
+                <property name="title">Minutes Short Break</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="mins_work">
+                <property name="title">Minutes Work</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
