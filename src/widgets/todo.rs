@@ -67,8 +67,16 @@ mod imp {
             let stack = &*self.stack;
             let entry = &*self.entry;
             let text = &*self.text;
-            self.edit.connect_clicked(
-                glib::clone!(@weak this, @weak stack, @weak entry, @weak text => move |_| {
+            self.edit.connect_clicked(glib::clone!(
+                #[weak]
+                this,
+                #[weak]
+                stack,
+                #[weak]
+                entry,
+                #[weak]
+                text,
+                move |_| {
                     let visible = stack.visible_child();
                     if let Some(visible) = visible {
                         if visible == entry {
@@ -79,14 +87,17 @@ mod imp {
                     stack.set_visible_child(&entry);
                     entry.grab_focus();
                     entry.set_width_request(this.width() * 4 / 7);
-                }),
-            );
+                }
+            ));
             self.entry.set_hexpand(true);
             self.entry.set_hexpand_set(true);
-            self.entry
-                .connect_activate(glib::clone!(@weak stack, @weak text => move |_| {
-                    stack.set_visible_child(&text)
-                }));
+            self.entry.connect_activate(glib::clone!(
+                #[weak]
+                stack,
+                #[weak]
+                text,
+                move |_| stack.set_visible_child(&text)
+            ));
         }
     }
 }

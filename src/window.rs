@@ -100,22 +100,28 @@ mod imp {
                 .and_downcast::<gio::ListStore>()
                 .unwrap();
             read_tasks(&todo_model);
-            self.todo_entry
-                .connect_icon_press(glib::clone!(@weak todo_model => move |entry, _| {
+            self.todo_entry.connect_icon_press(glib::clone!(
+                #[weak]
+                todo_model,
+                move |entry, _| {
                     let text: String = entry.buffer().property("text");
                     if Self::add_new_entry(&todo_model, text).is_none() {
                         glib::g_warning!("Pomdoro", "failed to add new entry");
                     }
                     entry.buffer().set_text("");
-                }));
-            self.todo_entry
-                .connect_activate(glib::clone!(@weak todo_model => move |entry| {
+                }
+            ));
+            self.todo_entry.connect_activate(glib::clone!(
+                #[weak]
+                todo_model,
+                move |entry| {
                     let text: String = entry.buffer().property("text");
                     if Self::add_new_entry(&todo_model, text).is_none() {
                         glib::g_warning!("Pomdoro", "failed to add new entry");
                     }
                     entry.buffer().set_text("");
-                }));
+                }
+            ));
 
             let state = self.state.clone();
             let timer = self.timer.clone();
@@ -160,8 +166,10 @@ mod imp {
             });
 
             let this = self.obj();
-            self.settings
-                .connect_clicked(glib::clone!(@weak this => move |_| {
+            self.settings.connect_clicked(glib::clone!(
+                #[weak]
+                this,
+                move |_| {
                     if let Some(app) = this.application() {
                         let app = app.downcast::<adw::Application>().unwrap();
                         let pref = crate::settings::Settings::new(&app);
@@ -169,7 +177,8 @@ mod imp {
                     } else {
                         glib::g_warning!("Pomdoro", "no application present");
                     }
-                }));
+                }
+            ));
         }
     }
     impl WidgetImpl for Window {}
@@ -180,16 +189,24 @@ mod imp {
     impl Window {
         pub fn add_new_entry(model: &gio::ListStore, text: impl Into<String>) -> Option<()> {
             let entry = state::todo::Entry::new(false, text);
-            entry.connect_done_notify(glib::clone!(@weak model => move |_| {
-                if let Err(err) = super::save_tasks(&model) {
-                    glib::g_warning!("Pomodoro", "{err}");
+            entry.connect_done_notify(glib::clone!(
+                #[weak]
+                model,
+                move |_| {
+                    if let Err(err) = super::save_tasks(&model) {
+                        glib::g_warning!("Pomodoro", "{err}");
+                    }
                 }
-            }));
-            entry.connect_desc_notify(glib::clone!(@weak model => move |_| {
-                if let Err(err) = super::save_tasks(&model) {
-                    glib::g_warning!("Pomodoro", "{err}");
+            ));
+            entry.connect_desc_notify(glib::clone!(
+                #[weak]
+                model,
+                move |_| {
+                    if let Err(err) = super::save_tasks(&model) {
+                        glib::g_warning!("Pomodoro", "{err}");
+                    }
                 }
-            }));
+            ));
             model.append(&entry);
             if let Err(err) = save_tasks(&model) {
                 glib::g_warning!("Pomodoro", "{err}");

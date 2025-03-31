@@ -53,8 +53,10 @@ mod imp {
             let secs = self.time_secs.get() % 60;
             let label = format!(r#"<span size="64pt">{mins}:{secs:0>2}</span>"#);
             timer.set_label(&label);
-            self.obj()
-                .connect_time_secs_notify(glib::clone!(@weak timer => move |obj| {
+            self.obj().connect_time_secs_notify(glib::clone!(
+                #[weak]
+                timer,
+                move |obj| {
                     let secs_until: i32 = obj.property("time_secs");
                     let ch = (secs_until < 0).then(|| '-').unwrap_or(' ');
                     let (mins, secs) = match secs_until {
@@ -63,12 +65,16 @@ mod imp {
                     };
                     let label = format!(r#"<span size="64pt">{ch}{mins}:{secs:0>2}</span>"#);
                     timer.set_label(&label);
-                }));
+                }
+            ));
             let obj = self.obj();
-            self.btn
-                .connect_clicked(glib::clone!(@weak obj => move |_| {
+            self.btn.connect_clicked(glib::clone!(
+                #[weak]
+                obj,
+                move |_| {
                     obj.emit_by_name::<()>("next", &[]);
-                }));
+                }
+            ));
         }
     }
 }
@@ -87,10 +93,13 @@ impl Default for Timer {
 impl Timer {
     pub fn connect_next(&self, f: impl Fn(&Timer) + 'static) {
         let this = self.imp();
-        this.btn
-            .connect_clicked(glib::clone!(@weak this => move |_| {
+        this.btn.connect_clicked(glib::clone!(
+            #[weak]
+            this,
+            move |_| {
                 let obj = this.obj();
                 f(&*obj);
-            }));
+            }
+        ));
     }
 }
